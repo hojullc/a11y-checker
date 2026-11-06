@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a11y-checker Demo</title>
+<style>
+body { font-family: system-ui, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 24px; background: #0d1117; color: #e6edf3; }
+h1 { font-size: 2rem; color: #58a6ff; margin-bottom: 8px; }
+.subtitle { color: #8b949e; margin-bottom: 40px; }
+.btn { background: #58a6ff; color: #0d1117; border: none; padding: 12px 28px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .2s; }
+.btn:hover { background: #79c0ff; }
+.demo-section { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 32px; margin-top: 32px; }
+.demo-section h2 { font-size: 1.1rem; color: #e6edf3; margin-bottom: 20px; }
+/* Intentional a11y issues for the demo */
+.bad-link { color: #58a6ff; cursor: pointer; }
+.low-contrast { color: #aaa; background: #bbb; padding: 4px 8px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<a href="#main">Skip to main content</a>
+<h1>a11y-checker</h1>
+<p class="subtitle">WCAG 2.2 accessibility scanner — click the button to scan this page (which has intentional issues for demo purposes).</p>
+
+<button class="btn" onclick="runScan()">Run Accessibility Scan</button>
+
+<main id="main">
+  <div class="demo-section">
+    <h2>Demo page elements (some intentionally broken)</h2>
+
+    <!-- Missing alt -->
+    <img src="https://via.placeholder.com/200x100" width="200" height="100">
+
+    <!-- Generic link text -->
+    <p>To learn more about accessibility, <a href="#" class="bad-link">click here</a>.</p>
+
+    <!-- Low contrast text -->
+    <p class="low-contrast">This text has low contrast and will be flagged.</p>
+
+    <!-- Form with no label -->
+    <input type="text" placeholder="Enter your name" style="padding:8px;margin:8px 0;display:block;background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:6px;">
+
+    <!-- Skip h2, go to h4 -->
+    <h4>This heading skips h3 — a hierarchy violation</h4>
+
+    <!-- Table with no headers -->
+    <table style="border-collapse:collapse;width:100%;margin-top:16px">
+      <tr><td style="padding:8px;border:1px solid #30363d">Row 1, Col 1</td><td style="padding:8px;border:1px solid #30363d">Row 1, Col 2</td></tr>
+      <tr><td style="padding:8px;border:1px solid #30363d">Row 2, Col 1</td><td style="padding:8px;border:1px solid #30363d">Row 2, Col 2</td></tr>
+    </table>
+
+    <!-- iframe with no title -->
+    <iframe src="about:blank" width="200" height="60" style="margin-top:16px;display:block;border:1px solid #30363d"></iframe>
+  </div>
+</main>
+
+<script src="../src/a11y-checker.js"></script>
+<script>
+function runScan() {
+  const results = A11yChecker.run({ showPanel: true, wcagLevel: 'AA' });
+  const s = A11yChecker.summary();
+  console.log('Summary:', s);
+}
+</script>
+</body>
+</html>
