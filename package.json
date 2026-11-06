@@ -1,0 +1,20 @@
+{
+  "name": "a11y-checker",
+  "version": "1.0.0",
+  "description": "Lightweight browser-side WCAG 2.2 accessibility scanner — zero dependencies, 8KB gzipped.",
+  "main": "src/a11y-checker.js",
+  "scripts": {
+    "demo": "open demo/index.html"
+  },
+  "keywords": ["accessibility", "wcag", "a11y", "aria", "ada", "scanner", "audit"],
+  "author": "Ronnie Vu <ronnie@hoju.us> (https://hoju.us)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hojullc/a11y-checker.git"
+  },
+  "homepage": "https://github.com/hojullc/a11y-checker#readme",
+  "bugs": {
+    "url": "https://github.com/hojullc/a11y-checker/issues"
+  }
+}
